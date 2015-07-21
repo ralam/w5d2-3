@@ -7,12 +7,12 @@ module Phase4
     # find the cookie for this app
     # deserialize the cookie into a hash
     def initialize(req)
-      session_cookie = req.cookies.find { |cookie| cookie.name == "_rails_lite_app" }
+      session_cookie = req.cookies.find { |c| c.name == "_rails_lite_app" }
 
       if session_cookie
         @session = JSON.parse(session_cookie.value)
       else
-        @seession = {}
+        @session = {}
       end
     end
 
@@ -21,12 +21,14 @@ module Phase4
     end
 
     def []=(key, val)
-      @session[key] = value
+      @session[key] = val
     end
 
     # serialize the hash into json and save in a cookie
     # add to the responses cookies
     def store_session(res)
+      session_cookie = WEBrick::Cookie.new("_rails_lite_app", @session.to_json)
+      res.cookies << session_cookie
     end
   end
 end
