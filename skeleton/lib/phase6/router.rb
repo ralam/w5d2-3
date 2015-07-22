@@ -14,7 +14,8 @@ module Phase6
 
     # checks if pattern matches path and method matches request method
     def matches?(req)
-      @http_method == req.request_method.downcase.to_sym
+      @http_method == req.request_method.downcase.to_sym &&
+        @pattern.match(req.path)
     end
 
     # use pattern to pull out route params (save for later?)
@@ -50,7 +51,7 @@ module Phase6
 
     # should return the route that matches this request
     def match(req)
-      @routes.find { |route| route.http_method == req.request_method.downcase.to_sym}
+      @routes.find { |route| route.matches?(req)}
     end
 
     # either throw 404 or call run on a matched route
