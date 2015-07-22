@@ -18,10 +18,11 @@ module Phase5
       if req.body
         parse_www_encoded_form(req.body)
       end
+      @params.merge!(route_params)
     end
 
     def [](key)
-      @params[key]
+      @params[key.to_s] || @params[key.to_sym]
     end
 
     # this will be useful if we want to `puts params` in the server log
