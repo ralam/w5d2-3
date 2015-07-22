@@ -13,7 +13,10 @@ module Phase5
     def initialize(req, route_params = {})
       @params = {}
       if req.query_string
-        parse_www_encoded_form(req.query_string).merge(route_params)
+        parse_www_encoded_form(req.query_string)
+      end
+      if req.body
+        parse_www_encoded_form(req.body)
       end
     end
 
