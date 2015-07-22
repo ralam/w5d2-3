@@ -11,10 +11,10 @@ module Phase5
     # You haven't done routing yet; but assume route params will be
     # passed in as a hash to `Params.new` as below:
     def initialize(req, route_params = {})
-      if req.query_string.nil?
-        @params = {}
-      else
+      if req.query_string
         @params = parse_www_encoded_form(req.query_string).merge(route_params)
+      else
+        @params = {}
       end
     end
 
@@ -42,6 +42,7 @@ module Phase5
     # this should return an array
     # user[address][street] should return ['user', 'address', 'street']
     def parse_key(key)
+      key.split(/\]\[|\[|\]/)
     end
   end
 end
