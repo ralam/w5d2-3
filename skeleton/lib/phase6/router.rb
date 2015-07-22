@@ -50,7 +50,7 @@ module Phase6
 
     # should return the route that matches this request
     def match(req)
-      @routes
+      @routes.find { |route| route.http_method == req.request_method.downcase.to_sym}
     end
 
     # either throw 404 or call run on a matched route
