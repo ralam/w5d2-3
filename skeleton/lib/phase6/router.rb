@@ -61,6 +61,12 @@ module Phase6
 
     # either throw 404 or call run on a matched route
     def run(req, res)
+      route = match(req)
+      if route
+        route.run
+      else
+        res.status = 404
+      end
     end
   end
 end
