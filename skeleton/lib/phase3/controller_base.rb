@@ -12,7 +12,6 @@ module Phase3
       controller_name = self.class.to_s.underscore
       file = File.read("views/#{controller_name}/#{template_name}.html.erb")
       template = ERB.new(file).result(binding)
-
       render_content(template, "text/html")
     end
   end

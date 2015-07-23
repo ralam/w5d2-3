@@ -63,7 +63,7 @@ module Phase6
     def run(req, res)
       route = match(req)
       if route
-        route.run
+        route.run(req, res)
       else
         res.status = 404
       end

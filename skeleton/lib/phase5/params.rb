@@ -19,6 +19,7 @@ module Phase5
         parse_www_encoded_form(req.body)
       end
       @params.merge!(route_params)
+      p @params
     end
 
     def [](key)

@@ -9,5 +9,6 @@ module Phase6
         render(name)
       end
     end
+  
   end
 end
